@@ -10,6 +10,7 @@ public class BallControl : MonoBehaviour {
 
     public float health;
     public float jump;
+    bool isGrouned;
 
     public float sprintMultiplier = 1.5f;
     public float stamina = 100.0f;
@@ -18,11 +19,17 @@ public class BallControl : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        isGrouned = true;
         health = 100;
         score = 0;
         rb = GetComponent<Rigidbody>();
 	}
 	
+    void OnCollisionEnter(Collision other)
+    {
+        isGrouned = true;
+    }
+
 	// Update is called once per frame
 	void Update ()
     {
@@ -50,9 +57,12 @@ public class BallControl : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-           rb.AddForce(0,jump,0,ForceMode.Impulse);
-        }
+       
+            if (Input.GetKeyDown(KeyCode.Space) && isGrouned)
+            {
+            isGrouned = false;
+                rb.AddForce(0, jump, 0, ForceMode.Impulse);
+            }
+        
 	}   
 }
