@@ -53,7 +53,7 @@ public class BallControl : MonoBehaviour {
         Vector3 move = new Vector3(horizontal, 0, vertical);
         rb.AddForce(move * speed * Time.deltaTime);
         rb.AddForce(move * finalSpeed * Time.deltaTime);
-        if (health == 0)
+        if (health <= 0)
         {
             Destroy(gameObject);
         }
